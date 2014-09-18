@@ -9,12 +9,20 @@ namespace AmadeusW.MessagePanelDemoApp
 {
     public class DemoViewModel : BaseViewModel
     {
-        private MessagePanelViewModel messagePanel;
+        public MessagePanelViewModel MessagePanel { get; set; } 
 
         public DemoViewModel()
         {
-            messagePanel = new MessagePanelViewModel();
+            MessagePanel = new MessagePanelViewModel();
             CreateNewMessageCommand = new CreateNewMessageCommand(this);
+
+            MessagePanel.Messages.Add(new MessageObject("Fatal", MessagePanelControl.MessageKind.Fatal));
+            MessagePanel.Messages.Add(new MessageObject("Error", MessagePanelControl.MessageKind.Error));
+            MessagePanel.Messages.Add(new MessageObject("Warning", MessagePanelControl.MessageKind.Warning));
+            MessagePanel.Messages.Add(new MessageObject("Info", MessagePanelControl.MessageKind.Info));
+            MessagePanel.Messages.Add(new MessageObject("Success", MessagePanelControl.MessageKind.Success));
+            MessagePanel.Messages.Add(new MessageObject("Success", MessagePanelControl.MessageKind.Success));
+            MessagePanel.Messages.Add(new MessageObject("Success", MessagePanelControl.MessageKind.Success));
         }
 
         #region XAML Binding
@@ -46,8 +54,8 @@ namespace AmadeusW.MessagePanelDemoApp
             {
                 newMessage = new MessageObject(MessageFormat, newMessageKind);
             }
-            
-            messagePanel.Messages.Add(newMessage);
+
+            MessagePanel.Messages.Add(newMessage);
         }
     }
 }
