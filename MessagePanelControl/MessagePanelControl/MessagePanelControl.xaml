@@ -4,13 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AmadeusW.MessagePanelControl"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
     <UserControl.Resources>
         <local:KindToColorConverter x:Key="KindToColorConverter" />
         <local:KindToGlyphConverter x:Key="KindToGlyphConverter" />
     </UserControl.Resources>
-    <ItemsControl ItemsSource="{Binding Messages}" Focusable="False">
+    
+    <!-- Store the reference to the MessagePanelViewModel in the tag of the ItemsControl -->
+    <ItemsControl ItemsSource="{Binding Messages}" Tag="{Binding .}" Focusable="False">
+
+        <!-- Animations for appearing and disappearing -->
+        <ItemsControl.Resources>
+            <Storyboard x:Key="enterStoryboard">
+                <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                             Duration="00:00:00.25"
+                                                             From="0, 0, 500, 0"
+                                                             To="0, 0, 0, 0"
+                                                             DecelerationRatio="1"
+                                                             FillBehavior="HoldEnd" />
+                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.25"
+                                                             From="0"
+                                                             To="1"
+                                                             FillBehavior="HoldEnd" />
+            </Storyboard>
+            <Storyboard x:Key="exitStoryboard">
+                <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                 Duration="00:00:00.25"
+                                                                 From="0, 0, 0, 0"
+                                                                 To="500, 0, 0, 0"
+                                                                 AccelerationRatio="1"                                        
+                                                                 FillBehavior="HoldEnd" />
+                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             Duration="00:00:00.25"
+                                                             From="1"
+                                                             To="0"
+                                                             FillBehavior="HoldEnd" />
+            </Storyboard>
+        </ItemsControl.Resources>
         
         <!-- Template specifies how this control looks like -->
         <ItemsControl.Template>
@@ -31,13 +64,42 @@
         <!-- ItemTemplate specifies how each item is displayed -->
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <DockPanel Background="{Binding Path=Kind, Converter={StaticResource KindToColorConverter}}" Opacity="0.8">
+                <DockPanel Background="{Binding Path=Kind, Converter={StaticResource KindToColorConverter}}">
                     <TextBlock Margin="10" FontFamily="Wingdings" Text="û" DockPanel.Dock="Right" /> <!-- Close button -->
                     <TextBlock Margin="0" FontFamily="Wingdings" Padding="10,12,0,0" Text="{Binding Path=Kind, Converter={StaticResource KindToGlyphConverter}}" DockPanel.Dock="Left" /> <!-- Glyph -->
                     <TextBlock Margin="10" Text="{Binding MessageBody}" />
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <!-- at least one element from assembly "i" must be named, so that VS correctly hooks up the assembly. Hence this is named interactivityFix -->
+                            <!-- We bind the underlying MessageObject to the command parameter, so that the main viewmodel can do work on this item. -->
+                            <i:InvokeCommandAction Command="{Binding Path=Tag.RemoveMessageCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding .}" x:Name="interactivityFix" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </DockPanel>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
+
+        <ItemsControl.ItemContainerStyle>
+            <Style>
+                <Style.Triggers>
+                    <!-- The following triggers are responsible for move in/out animations -->
+                    <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=DataContext.IsAlive}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <StaticResource ResourceKey="enterStoryboard"/>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=DataContext.IsAlive}" Value="False">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <StaticResource ResourceKey="exitStoryboard"/>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ItemsControl.ItemContainerStyle>
         
     </ItemsControl>
 </UserControl>

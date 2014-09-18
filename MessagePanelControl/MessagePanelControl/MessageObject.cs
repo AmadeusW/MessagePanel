@@ -11,7 +11,7 @@ namespace AmadeusW.MessagePanelControl
         readonly string _messageFormat;
         readonly string[] _messageParameters;
         readonly MessageKind _kind;
-        bool _disappearing = false;
+        bool _isAlive = true;
 
         public MessageObject(string messageBody, MessageKind kind)
         {
@@ -51,15 +51,15 @@ namespace AmadeusW.MessagePanelControl
             }
         }
 
-        internal bool Disappearing
+        public bool IsAlive
         {
             get
             {
-                return _disappearing;
+                return _isAlive;
             }
             set
             {
-                _disappearing = value;
+                _isAlive = value;
                 NotifyPropertyChanged();
             }
         }
