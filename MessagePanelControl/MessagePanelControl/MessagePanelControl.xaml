@@ -33,7 +33,7 @@
             <DataTemplate>
                 <DockPanel Background="{Binding Path=Kind, Converter={StaticResource KindToColorConverter}}" Opacity="0.8">
                     <TextBlock Margin="10" FontFamily="Wingdings" Text="û" DockPanel.Dock="Right" /> <!-- Close button -->
-                    <TextBlock Margin="10" FontFamily="Wingdings" Text="{Binding Path=Kind, Converter={StaticResource KindToGlyphConverter}}" DockPanel.Dock="Left" /> <!-- Glyph -->
+                    <TextBlock Margin="0" FontFamily="Wingdings" Padding="10,12,0,0" Text="{Binding Path=Kind, Converter={StaticResource KindToGlyphConverter}}" DockPanel.Dock="Left" /> <!-- Glyph -->
                     <TextBlock Margin="10" Text="{Binding MessageBody}" />
                 </DockPanel>
             </DataTemplate>
