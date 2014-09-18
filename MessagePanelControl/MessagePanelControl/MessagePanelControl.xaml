@@ -42,6 +42,8 @@
                                                              From="1"
                                                              To="0"
                                                              FillBehavior="HoldEnd" />
+                <!-- After sliding out to the right, slide up so that remaining items 
+                     in the collection smoothly fill the gap -->
                 <ThicknessAnimation Storyboard.TargetProperty="Margin"
                                                                  BeginTime="00:00:00.25"
                                                                  Duration="00:00:00.25"
