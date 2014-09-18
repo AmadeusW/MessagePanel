@@ -34,7 +34,7 @@ namespace AmadeusW.MessagePanelControl
             _kind = kind;
         }
 
-        internal String MessageBody
+        public String MessageBody
         {
             get
             {
@@ -43,7 +43,7 @@ namespace AmadeusW.MessagePanelControl
             }
         }
 
-        internal MessageKind Kind
+        public MessageKind Kind
         {
             get
             {
