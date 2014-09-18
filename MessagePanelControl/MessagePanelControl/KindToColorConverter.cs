@@ -6,6 +6,9 @@ using System.Windows.Media;
 
 namespace AmadeusW.MessagePanelControl
 {
+    /// <summary>
+    /// Sets the color based on supplied kind of a message.
+    /// </summary>
     [ValueConversion(typeof(MessageKind), typeof(SolidColorBrush))]
     public class KindToColorConverter : IValueConverter
     {
@@ -24,7 +27,7 @@ namespace AmadeusW.MessagePanelControl
                 case MessageKind.Error:
                     return new SolidColorBrush(Colors.OrangeRed);
                 case MessageKind.Warning:
-                    return new SolidColorBrush(Colors.Goldenrod);
+                    return new SolidColorBrush(Colors.Gold);
                 case MessageKind.Success:
                     return new SolidColorBrush(Colors.GreenYellow);
                 default:
