@@ -12,32 +12,49 @@ namespace AmadeusW.MessagePanelControl
     [ValueConversion(typeof(MessageKind), typeof(SolidColorBrush))]
     public class KindToColorConverter : IValueConverter
     {
+        private static SolidColorBrush InfoBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+        private static SolidColorBrush FatalBrush = new SolidColorBrush(Colors.Firebrick);
+        private static SolidColorBrush ErrorBrush = new SolidColorBrush(Colors.OrangeRed);
+        private static SolidColorBrush WarningBrush = new SolidColorBrush(Colors.Gold);
+        private static SolidColorBrush SuccessBrush = new SolidColorBrush(Colors.GreenYellow);
+        private static SolidColorBrush UnknownBrush = new SolidColorBrush(Colors.Gainsboro);
+
+        static KindToColorConverter()
+        {
+            InfoBrush.Freeze();
+            FatalBrush.Freeze();
+            ErrorBrush.Freeze();
+            WarningBrush.Freeze();
+            SuccessBrush.Freeze();
+            UnknownBrush.Freeze();
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is MessageKind))
             {
-                return new SolidColorBrush(Colors.Gainsboro);
+                return UnknownBrush;
             }
             switch ((MessageKind)value)
             {
                 case MessageKind.Info:
-                    return new SolidColorBrush(Colors.DeepSkyBlue);
+                    return InfoBrush;
                 case MessageKind.Fatal:
-                    return new SolidColorBrush(Colors.Firebrick);
+                    return FatalBrush;
                 case MessageKind.Error:
-                    return new SolidColorBrush(Colors.OrangeRed);
+                    return ErrorBrush;
                 case MessageKind.Warning:
-                    return new SolidColorBrush(Colors.Gold);
+                    return WarningBrush;
                 case MessageKind.Success:
-                    return new SolidColorBrush(Colors.GreenYellow);
+                    return SuccessBrush;
                 default:
-                    return new SolidColorBrush(Colors.Gainsboro);
+                    return UnknownBrush;
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
