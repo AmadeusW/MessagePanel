@@ -44,7 +44,7 @@ namespace AmadeusW.MessagePanelControl
                 // We need to implement something of our own
                 Task.Run(() =>
                     {
-                        Thread.Sleep(250);
+                        Thread.Sleep(500);
                         acutallyRemoveMessageFromCollection(message);
                     }
                 );

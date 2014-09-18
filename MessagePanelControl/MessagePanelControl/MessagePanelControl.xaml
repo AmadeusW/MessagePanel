@@ -42,6 +42,13 @@
                                                              From="1"
                                                              To="0"
                                                              FillBehavior="HoldEnd" />
+                <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                 BeginTime="00:00:00.25"
+                                                                 Duration="00:00:00.25"
+                                                                 From="500, 0, 0, 0"
+                                                                 To="500, -50, 0, 0"
+                                                                 DecelerationRatio="1"                                        
+                                                                 FillBehavior="HoldEnd" />                
             </Storyboard>
         </ItemsControl.Resources>
         
