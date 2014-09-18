@@ -1,0 +1,41 @@
+﻿<Window x:Class="AmadeusW.MessagePanelDemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:messageControl="clr-namespace:AmadeusW.MessagePanelControl"
+        xmlns:local="clr-namespace:AmadeusW.MessagePanelDemoApp"
+        Title="Demo app" Height="350" Width="525">
+    <Window.DataContext>
+        <local:DemoViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock>Message format:</TextBlock>
+            <TextBox x:Name="messageTextBox" Text="{Binding MessageFormat}" />
+            <TextBlock>Message kind (optional):</TextBlock>
+            <TextBox Text="{Binding MessageKind}" />
+            <TextBlock>Message param (optional):</TextBlock>
+            <TextBox Text="{Binding MessageParam1}" />
+            <TextBlock>Message param 2 (optional):</TextBlock>
+            <TextBox Text="{Binding MessageParam2}" />
+            <Button Command="{Binding CreateNewMessageCommand}" CommandParameter="{Binding ElementName=messageTextBox, Path=Text}" Content="Create message"/>
+        </StackPanel>
+    </Grid>
+</Window>
