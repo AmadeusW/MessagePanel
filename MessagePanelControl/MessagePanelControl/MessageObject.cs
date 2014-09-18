@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace AmadeusW.MessagePanelControl
 {
-    internal class MessageObject : BaseViewModel
+    public class MessageObject : BaseViewModel
     {
         readonly string _messageFormat;
         readonly string[] _messageParameters;
         readonly MessageKind _kind;
         bool _disappearing = false;
 
-        internal MessageObject(string messageBody, MessageKind kind)
+        public MessageObject(string messageBody, MessageKind kind)
         {
             _messageFormat = messageBody;
             _messageParameters = null;
             _kind = kind;
         }
 
-        internal MessageObject(string messageFormat, string messageParameter, MessageKind kind)
+        public MessageObject(string messageFormat, MessageKind kind, string messageParameter)
         {
             _messageFormat = messageFormat;
             _messageParameters = new String[] { messageParameter };
             _kind = kind;
         }
 
-        internal MessageObject(string messageFormat, string[] messageParameters, MessageKind kind)
+        public MessageObject(string messageFormat, MessageKind kind, string[] messageParameters)
         {
             _messageFormat = messageFormat;
             _messageParameters = messageParameters;

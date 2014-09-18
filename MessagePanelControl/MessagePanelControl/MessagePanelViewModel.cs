@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AmadeusW.MessagePanelControl
 {
-    internal class MessagePanelViewModel : BaseViewModel
+    public class MessagePanelViewModel : BaseViewModel
     {
         ObservableCollection<MessageObject> _messages = new ObservableCollection<MessageObject>();
 
-        ObservableCollection<MessageObject> Messages
+        public ObservableCollection<MessageObject> Messages
         {
             get
             {

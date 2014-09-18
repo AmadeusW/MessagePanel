@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AmadeusW.MessagePanelControl
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
 

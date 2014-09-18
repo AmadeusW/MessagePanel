@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace AmadeusW.MessagePanelControl
 {
-    internal enum MessageKind
+    public enum MessageKind
     {
-         Fatal
+        Info
+        ,Fatal
         ,Error
         ,Warning
-        ,Info
         ,Success
-        ,Neutral
     }
 }
