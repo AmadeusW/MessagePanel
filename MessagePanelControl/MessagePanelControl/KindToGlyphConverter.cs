@@ -21,15 +21,15 @@ namespace AmadeusW.MessagePanelControl
             switch ((MessageKind)value)
             {
                 case MessageKind.Info:
-                    return "w";
+                    return "w"; // a diamond
                 case MessageKind.Fatal:
-                    return "I";
+                    return "û"; // X icon
                 case MessageKind.Error:
-                    return "û";
+                    return "û"; // X icon
                 case MessageKind.Warning:
-                    return "Ö";
+                    return "w"; // a diamond
                 case MessageKind.Success:
-                    return "ü";
+                    return "ü"; // a checkmark
                 default:
                     return " ";
             }
