@@ -52,6 +52,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="KindToGlyphConverter.cs" />
+    <Compile Include="KindToColorConverter.cs" />
     <Compile Include="MessageKind.cs" />
     <Compile Include="MessageObject.cs" />
     <Compile Include="MessagePanelControl.xaml.cs">

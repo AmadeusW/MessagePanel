@@ -3,14 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AmadeusW.MessagePanelControl"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
-    <ItemsControl ItemsSource="{Binding MessageSource}" Focusable="False">
+    <UserControl.Resources>
+        <local:KindToColorConverter x:Key="KindToColorConverter" />
+        <local:KindToGlyphConverter x:Key="KindToGlyphConverter" />
+    </UserControl.Resources>
+    <ItemsControl ItemsSource="{Binding Messages}" Focusable="False">
         
         <!-- Template specifies how this control looks like -->
         <ItemsControl.Template>
             <ControlTemplate TargetType="ItemsControl">
-                <Border BorderThickness="4">
+                <Border BorderThickness="4" >
                     <ItemsPresenter />
                 </Border>
             </ControlTemplate>
@@ -26,9 +31,10 @@
         <!-- ItemTemplate specifies how each item is displayed -->
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <DockPanel Background="Honeydew">
-                    <TextBlock Text="X" DockPanel.Dock="Right" />
-                    <TextBlock Text="{Binding MessageBody}" />
+                <DockPanel Background="{Binding Path=Kind, Converter={StaticResource KindToColorConverter}}" Opacity="0.8">
+                    <TextBlock Margin="10" FontFamily="Wingdings" Text="û" DockPanel.Dock="Right" /> <!-- Close button -->
+                    <TextBlock Margin="10" FontFamily="Wingdings" Text="{Binding Path=Kind, Converter={StaticResource KindToGlyphConverter}}" DockPanel.Dock="Left" /> <!-- Glyph -->
+                    <TextBlock Margin="10" Text="{Binding MessageBody}" />
                 </DockPanel>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
