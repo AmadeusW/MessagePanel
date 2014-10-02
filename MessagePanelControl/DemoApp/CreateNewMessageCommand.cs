@@ -19,7 +19,14 @@ namespace AmadeusW.MessagePanelDemoApp
 
         public void Execute(object parameter)
         {
-            _demoViewModel.CreateNewMessage();
+            if (parameter != null && parameter.ToString() == "demo")
+            {
+                _demoViewModel.Demo();
+            }
+            else
+            {
+                _demoViewModel.CreateNewMessage();
+            }
         }
 
         public event EventHandler CanExecuteChanged;

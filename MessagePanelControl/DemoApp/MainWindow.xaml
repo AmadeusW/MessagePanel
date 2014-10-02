@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:messageControl="clr-namespace:AmadeusW.MessagePanelControl;assembly=AmadeusW.MessagePanelControl"
         xmlns:local="clr-namespace:AmadeusW.MessagePanelDemoApp"
-        Title="Demo app" Height="350" Width="525">
+        Title="Demo app" Height="350" Width="525" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:DemoViewModel />
     </Window.DataContext>
